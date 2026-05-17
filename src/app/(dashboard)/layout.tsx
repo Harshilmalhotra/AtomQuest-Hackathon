@@ -37,7 +37,11 @@ export default function DashboardLayout({
             </Link>
             <Link href="/check-ins" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
               <CheckSquare className="w-5 h-5 mr-3 opacity-70" />
-              Quarterly Check-ins
+              My Check-ins
+            </Link>
+            <Link href="/team-checkins" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
+              <CheckSquare className="w-5 h-5 mr-3 opacity-70" />
+              Team Check-ins
             </Link>
             <Link href="/reports" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
               <BarChart className="w-5 h-5 mr-3 opacity-70" />
