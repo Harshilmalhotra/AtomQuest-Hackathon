@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { Target, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-const prisma = new PrismaClient();
 
 export default async function ApprovalsPage() {
   const { userId } = await auth();

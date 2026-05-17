@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { ManagerReviewForm } from "@/components/ManagerReviewForm";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-
-const prisma = new PrismaClient();
 
 export default async function ApprovalReviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { userId } = await auth();

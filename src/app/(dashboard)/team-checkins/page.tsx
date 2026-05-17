@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { CheckSquare, User as UserIcon } from "lucide-react";
 import { TeamCheckInReview } from "@/components/TeamCheckInReview";
-
-const prisma = new PrismaClient();
 
 export default async function TeamCheckInsPage() {
   const { userId } = await auth();

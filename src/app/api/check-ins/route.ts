@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 function calculateSystemScore(actual: number, target: number, uomType: string): number {
   if (target === 0 && uomType !== "ZERO") return 0; // Prevent division by zero
