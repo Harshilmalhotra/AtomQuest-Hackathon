@@ -145,7 +145,8 @@ export function GoalSheetForm() {
                   <Input 
                     {...form.register(`goals.${index}.title`)} 
                     placeholder="e.g., Increase Q2 Revenue" 
-                    className="rounded-lg"
+                    className={`rounded-lg ${field.isShared ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
+                    readOnly={field.isShared}
                   />
                   {form.formState.errors.goals?.[index]?.title && (
                     <p className="text-xs text-red-500">{form.formState.errors.goals[index].title.message}</p>
@@ -157,7 +158,8 @@ export function GoalSheetForm() {
                   <Input 
                     {...form.register(`goals.${index}.thrustArea`)} 
                     placeholder="e.g., Financial Growth" 
-                    className="rounded-lg"
+                    className={`rounded-lg ${field.isShared ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
+                    readOnly={field.isShared}
                   />
                   {form.formState.errors.goals?.[index]?.thrustArea && (
                     <p className="text-xs text-red-500">{form.formState.errors.goals[index].thrustArea.message}</p>
@@ -169,8 +171,9 @@ export function GoalSheetForm() {
                   <Textarea 
                     {...form.register(`goals.${index}.description`)} 
                     placeholder="Provide details about how this goal will be achieved..."
-                    className="rounded-lg resize-none"
+                    className={`rounded-lg resize-none ${field.isShared ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
                     rows={2}
+                    readOnly={field.isShared}
                   />
                 </div>
 
@@ -178,7 +181,8 @@ export function GoalSheetForm() {
                   <Label>Unit of Measurement (UoM) <span className="text-red-500">*</span></Label>
                   <select 
                     {...form.register(`goals.${index}.uomType`)}
-                    className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className={`flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${field.isShared ? "bg-slate-100 text-slate-500 pointer-events-none" : ""}`}
+                    disabled={field.isShared}
                   >
                     <option value="MIN_NUMERIC">Numeric / % (Higher is better)</option>
                     <option value="MAX_NUMERIC">Numeric / % (Lower is better)</option>
@@ -193,7 +197,8 @@ export function GoalSheetForm() {
                     <Input 
                       type="number"
                       {...form.register(`goals.${index}.target`)} 
-                      className="rounded-lg"
+                      className={`rounded-lg ${field.isShared ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
+                      readOnly={field.isShared}
                     />
                     {form.formState.errors.goals?.[index]?.target && (
                       <p className="text-xs text-red-500">{form.formState.errors.goals[index].target.message}</p>

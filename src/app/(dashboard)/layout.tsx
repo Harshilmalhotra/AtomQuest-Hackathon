@@ -27,6 +27,14 @@ export default function DashboardLayout({
               <Target className="w-5 h-5 mr-3 opacity-70" />
               Goal Sheets
             </Link>
+            <Link href="/approvals" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
+              <CheckSquare className="w-5 h-5 mr-3 opacity-70" />
+              Team Approvals
+            </Link>
+            <Link href="/shared-goals" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
+              <Target className="w-5 h-5 mr-3 opacity-70" />
+              Shared KPIs
+            </Link>
             <Link href="/check-ins" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
               <CheckSquare className="w-5 h-5 mr-3 opacity-70" />
               Quarterly Check-ins
