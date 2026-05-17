@@ -1,13 +1,123 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(uuid())
+  clerkId    String      @unique
+  email      String      @unique
+  name       String?
+  role       Role        @default(EMPLOYEE)
+  department String?
+  
+  // Self-relation for manager hierarchy
+  managerId  String?
+  manager    User?       @relation("ManagerToEmployee", fields: [managerId], references: [id])
+  employees  User[]      @relation("ManagerToEmployee")
+
+  goalSheets GoalSheet[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+enum Role {
+  EMPLOYEE
+  MANAGER
+  ADMIN
+}
+
+model GoalSheet {
+  id        String          @id @default(uuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  year      Int
+  status    GoalSheetStatus @default(DRAFT)
+  lockedAt  DateTime?
+  
+  goals     Goal[]
+
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum GoalSheetStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  RETURNED
+}
+
+model Goal {
+  id           String    @id @default(uuid())
+  goalSheetId  String
+  goalSheet    GoalSheet @relation(fields: [goalSheetId], references: [id], onDelete: Cascade)
+  
+  title        String
+  description  String?
+  thrustArea   String
+  uomType      UOMType
+  target       Float
+  weightage    Float
+  
+  isShared     Boolean   @default(false)
+  sharedFromId String?   // ID of the original shared goal, if applicable
+
+  checkIns     CheckIn[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+enum UOMType {
+  MIN_NUMERIC // Higher is better (e.g., Sales)
+  MAX_NUMERIC // Lower is better (e.g., TAT)
+  TIMELINE    // Date-based
+  ZERO        // Zero = Success
+}
+
+model CheckIn {
+  id                String         @id @default(uuid())
+  goalId            String
+  goal              Goal           @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  
+  quarter           Quarter
+  actualAchievement Float?
+  status            CheckInStatus  @default(NOT_STARTED)
+  managerComment    String?
+  systemScore       Float?
+
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+}
+
+enum Quarter {
+  Q1
+  Q2
+  Q3
+  Q4
+}
+
+enum CheckInStatus {
+  NOT_STARTED
+  ON_TRACK
+  COMPLETED
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  entity    String   // e.g., 'GoalSheet', 'Goal'
+  entityId  String
+  action    String   // e.g., 'UPDATE', 'APPROVE'
+  changedBy String   // User ID
+  oldValue  Json?
+  newValue  Json?
+  timestamp DateTime @default(now())
 }
