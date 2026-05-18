@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { getAuth as auth } from "@/lib/auth";
 import { CheckSquare } from "lucide-react";
 import { CheckInList } from "@/components/CheckInList";
 

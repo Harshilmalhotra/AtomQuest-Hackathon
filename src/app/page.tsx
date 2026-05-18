@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { auth } from "@clerk/nextjs/server";
+import { getAuth as auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Target, CheckCircle, BarChart3 } from "lucide-react";
 

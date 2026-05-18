@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getAuth as auth } from "@/lib/auth";
 
 export default async function DashboardPage() {
   const { userId } = await auth();

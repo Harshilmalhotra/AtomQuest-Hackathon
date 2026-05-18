@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
+import { getAuth as auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 function calculateSystemScore(actual: number, target: number, uomType: string): number {

@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { getAuth as auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import { ManagerReviewForm } from "@/components/ManagerReviewForm";
 import Link from "next/link";
