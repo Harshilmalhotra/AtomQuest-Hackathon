@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { Target, LayoutDashboard, CheckSquare, BarChart } from "lucide-react";
 import Link from "next/link";
 import { CustomLogoutButton } from "@/components/CustomLogoutButton";
+import NotificationBell from "@/components/NotificationBell";
 
 export default async function DashboardLayout({
   children,
@@ -114,6 +115,7 @@ export default async function DashboardLayout({
         {/* Top Navbar */}
         <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-end px-10 shadow-sm z-10">
           <div className="flex items-center gap-6">
+            <NotificationBell />
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
                 <div className="text-sm font-semibold text-slate-700">{displayName}</div>

@@ -59,6 +59,17 @@ export async function POST(req: Request) {
       },
     });
 
+    if (dbUser.managerId) {
+      await prisma.notification.create({
+        data: {
+          userId: dbUser.managerId,
+          title: "Goal Sheet Submitted 📥",
+          message: `Employee ${dbUser.name || dbUser.email} has submitted a new Goal Sheet for review.`,
+          type: "GOALS_SUBMITTED"
+        }
+      });
+    }
+
     return NextResponse.json(goalSheet, { status: 201 });
 
   } catch (error) {

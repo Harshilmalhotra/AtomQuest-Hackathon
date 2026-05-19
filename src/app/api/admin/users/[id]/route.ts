@@ -27,8 +27,20 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       data: {
         role: updates.role,
         managerId: updates.managerId,
-      }
+      },
+      include: { manager: true }
     });
+
+    if (updates.managerId) {
+      await prisma.notification.create({
+        data: {
+          userId: updatedUser.id,
+          title: "Manager Assigned 👔",
+          message: `You have been assigned to reporting manager: ${updatedUser.manager?.name || updatedUser.manager?.email}.`,
+          type: "MANAGER_ASSIGNED"
+        }
+      });
+    }
 
     return NextResponse.json(updatedUser);
   } catch (error) {

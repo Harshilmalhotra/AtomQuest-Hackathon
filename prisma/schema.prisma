@@ -24,6 +24,7 @@ model User {
   employees  User[]      @relation("ManagerToEmployee")
 
   goalSheets GoalSheet[]
+  notifications Notification[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -121,3 +122,15 @@ model AuditLog {
   newValue  Json?
   timestamp DateTime @default(now())
 }
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  type      String   // 'MANAGER_ASSIGNED', 'GOALS_SUBMITTED', 'GOALS_APPROVED', 'GOALS_RETURNED'
+  createdAt DateTime @default(now())
+}
+
