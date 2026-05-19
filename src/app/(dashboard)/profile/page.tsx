@@ -74,12 +74,12 @@ export default async function ProfilePage() {
               
               <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-500 shrink-0 shadow-sm border border-slate-200">
-                  <Shield className="w-5 h-5" />
+                  <UserIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-slate-500">Reporting Manager</div>
                   <div className="text-indigo-900 font-bold text-lg">
-                    {dbUser.manager ? (dbUser.manager.name || dbUser.manager.email) : "No Manager Assigned (Top Level)"}
+                    {dbUser.manager ? (dbUser.manager.name || dbUser.manager.email) : "Unassigned (Admin to assign Manager)"}
                   </div>
                 </div>
               </div>
