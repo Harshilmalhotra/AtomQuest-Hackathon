@@ -1,4 +1,5 @@
 import { getAuth as auth } from "@/lib/auth";
+import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { Target, LayoutDashboard, CheckSquare, BarChart } from "lucide-react";
 import Link from "next/link";
@@ -12,9 +13,41 @@ export default async function DashboardLayout({
   const { userId } = await auth();
   
   // Fetch real user from DB
-  const dbUser = await prisma.user.findUnique({
+  let dbUser = await prisma.user.findUnique({
     where: { clerkId: userId ?? "" }
   });
+
+  // If this is a real Clerk user, sync their actual name/email into the DB
+  if (userId && !userId.startsWith("seed_")) {
+    try {
+      const clerkUser = await currentUser();
+      if (clerkUser) {
+        const realEmail = clerkUser.emailAddresses[0]?.emailAddress || `${userId}@example.com`;
+        const realName = clerkUser.firstName ? `${clerkUser.firstName} ${clerkUser.lastName || ""}`.trim() : null;
+        
+        if (!dbUser) {
+          dbUser = await prisma.user.create({
+            data: {
+              clerkId: userId,
+              email: realEmail,
+              name: realName,
+              role: "EMPLOYEE",
+            }
+          });
+        } else if (dbUser.email.startsWith("user_") || (!dbUser.name && realName)) {
+          dbUser = await prisma.user.update({
+            where: { id: dbUser.id },
+            data: {
+              email: realEmail,
+              name: realName || dbUser.name
+            }
+          });
+        }
+      }
+    } catch(e) {
+      console.warn("Clerk user fetch failed", e);
+    }
+  }
 
   const displayRole = dbUser?.role ? `${dbUser.role} Role` : "Employee Role";
   const displayName = dbUser?.name || dbUser?.email || "My Account";
@@ -60,6 +93,13 @@ export default async function DashboardLayout({
               Analytics & Reports
             </Link>
           </nav>
+        </div>
+        
+        <div className="mt-auto p-6 border-t border-sidebar-border">
+          <Link href="/profile" className="flex items-center px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-all">
+            <svg className="w-5 h-5 mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+            My Profile
+          </Link>
         </div>
       </aside>
 
