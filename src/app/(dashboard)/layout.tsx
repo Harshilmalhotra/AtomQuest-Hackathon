@@ -58,7 +58,7 @@ export default async function DashboardLayout({
       <aside className="w-72 bg-sidebar border-r border-sidebar-border flex flex-col shadow-xl z-20">
         <div className="h-20 flex items-center px-8 font-extrabold text-2xl tracking-tight text-sidebar-foreground border-b border-sidebar-border">
           <Target className="w-8 h-8 mr-3 text-sidebar-primary" />
-          ATOMQUEST
+          ALIGNIQ
         </div>
         
         <div className="px-6 py-6 flex-1 overflow-y-auto">

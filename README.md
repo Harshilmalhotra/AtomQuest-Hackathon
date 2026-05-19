@@ -1,8 +1,8 @@
-# AtomQuest: Next-Gen Employee Goal Tracking Portal 🚀
+# AlignIQ: Next-Gen Employee Goal Tracking Portal 🚀
 
 An enterprise-grade, role-based performance management system designed to streamline Goal Setting, Quarterly Check-ins, and Top-Down KPI alignments. Built with modern web technologies and enhanced with powerful generative AI features to maximize employee productivity and HR governance.
 
-![AtomQuest Cover](https://via.placeholder.com/1200x400?text=AtomQuest+Goal+Tracking+Portal)
+![AlignIQ Cover](https://via.placeholder.com/1200x400?text=AlignIQ+Goal+Tracking+Portal)
 
 ---
 
@@ -69,7 +69,7 @@ We went beyond the standard requirements to deliver a truly next-generation user
 1. **Clone and Install:**
    ```bash
    git clone <repo-url>
-   cd atomquest-portal
+   cd aligniq-portal
    npm install
    ```
 

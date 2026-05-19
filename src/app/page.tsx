@@ -17,7 +17,7 @@ export default async function LandingPage() {
       <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shadow-sm">
         <div className="flex items-center gap-2 font-bold text-2xl tracking-tight text-slate-900">
           <Target className="w-8 h-8 text-primary" />
-          ATOMQUEST <span className="font-light text-slate-500 hidden sm:inline">Portal</span>
+          ALIGNIQ <span className="font-light text-slate-500 hidden sm:inline">Portal</span>
         </div>
         <div className="flex gap-4">
           <Link href="/sign-in">

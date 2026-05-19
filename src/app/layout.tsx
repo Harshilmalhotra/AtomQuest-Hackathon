@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ATOMQUEST Portal",
+  title: "ALIGNIQ Portal",
   description: "Goal Setting & Tracking Portal",
 };
 
