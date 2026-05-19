@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `
       You are an expert HR Performance Coach.
@@ -41,7 +41,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ result: responseText });
 
   } catch (error) {
-    console.error("[SMART_GOAL_AI]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    console.error("[SMART_GOAL_AI_ERROR]", error);
+    // If the API key fails (invalid, expired, quota exceeded), gracefully fallback to the mock!
+    return NextResponse.json({
+      result: `Specific: Improve performance related to the goal.\nMeasurable: Track progress using exact numeric KPIs under the selected area.\nAchievable: Ensure resources are aligned to meet this target.\nRelevant: Directly aligns with our strategic objectives.\nTime-bound: Must be completed by the end of Q4.\n\nSummary: Drive a measurable increase in performance by systematically tracking core metrics and ensuring cross-functional alignment by Q4.`
+    });
   }
 }

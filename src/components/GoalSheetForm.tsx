@@ -118,6 +118,67 @@ export function GoalSheetForm() {
         </Alert>
       )}
 
+      {/* Magic AI Auto-Filler */}
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-2xl border border-indigo-100 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-4 opacity-10">
+          <svg className="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z"/></svg>
+        </div>
+        <div className="relative z-10">
+          <h3 className="text-lg font-extrabold text-indigo-900 flex items-center gap-2 mb-2">
+            <span className="text-xl">✨</span> Magic AI Auto-Filler
+          </h3>
+          <p className="text-sm text-indigo-700 mb-4 max-w-2xl">
+            Have a messy email or document with your goals? Paste it below. The AI will parse it, structure it, and auto-fill your entire Goal Sheet.
+          </p>
+          <div className="flex gap-4 items-start">
+            <Textarea 
+              id="ai-autofill-input"
+              placeholder="Paste your raw goals text here... (e.g. 'I need to increase Q3 sales by 500k. Also make sure there are zero safety incidents on the floor.')"
+              className="bg-white border-indigo-200 focus-visible:ring-indigo-500 flex-1"
+              rows={3}
+            />
+            <Button 
+              type="button"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md rounded-xl shrink-0"
+              onClick={async (e) => {
+                const btn = e.currentTarget;
+                const input = document.getElementById('ai-autofill-input') as HTMLTextAreaElement;
+                if (!input.value) return alert('Please paste some text first.');
+                
+                btn.innerHTML = 'Parsing...';
+                btn.disabled = true;
+                
+                try {
+                  const res = await fetch('/api/ai/parse-goals', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: input.value })
+                  });
+                  
+                  if (res.ok) {
+                    const data = await res.json();
+                    if (data.goals && Array.isArray(data.goals)) {
+                      // We use `replace` to wipe the current fields and drop in the new ones
+                      form.setValue('goals', data.goals);
+                      input.value = '';
+                    }
+                  } else {
+                    alert('AI failed to parse the text.');
+                  }
+                } catch(err) {
+                  alert('Error calling AI parser.');
+                } finally {
+                  btn.innerHTML = 'Auto-Fill Goals';
+                  btn.disabled = false;
+                }
+              }}
+            >
+              Auto-Fill Goals
+            </Button>
+          </div>
+        </div>
+      </div>
+
       <form className="space-y-6">
         {fields.map((field, index) => (
           <Card key={field.id} className="relative rounded-2xl border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
