@@ -45,8 +45,10 @@ We went beyond the standard requirements to deliver a truly next-generation user
 
 ## 🏗️ Architecture Diagram
 
-> **[PLACE YOUR ARCHITECTURE DIAGRAM HERE]**
-> *(Paste your Mermaid.js code or embed your image link here)*
+
+
+<img width="2546" height="1460" alt="image" src="https://github.com/user-attachments/assets/71e665ab-5834-4d77-b615-ec5c26614660" />
+
 
 ---
 
