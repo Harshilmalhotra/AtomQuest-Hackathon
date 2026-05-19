@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { getAuth as auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Target, CheckCircle, BarChart3 } from "lucide-react";
+import FeaturesToggle from "@/components/FeaturesToggle";
 
 export default async function LandingPage() {
   const { userId } = await auth();
@@ -79,6 +80,10 @@ export default async function LandingPage() {
             <h3 className="text-xl font-bold mb-3 text-slate-900">Real-time Visibility</h3>
             <p className="text-slate-600">Managers gain instant oversight into team progress with comprehensive dashboards.</p>
           </div>
+        </div>
+
+        <div className="mt-24 w-full max-w-5xl mb-24">
+          <FeaturesToggle />
         </div>
       </main>
     </div>
