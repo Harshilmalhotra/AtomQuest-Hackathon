@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { WelcomeModal } from "@/components/WelcomeModal";
 
 
 export default async function DashboardPage() {
@@ -81,6 +82,8 @@ export default async function DashboardPage() {
           <p className="text-4xl font-extrabold text-slate-900 mt-2">{avgScore}%</p>
         </div>
       </div>
+
+      <WelcomeModal />
     </div>
   );
 }
