@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { getAuth as auth } from "@/lib/auth";
 import { Download, Activity, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnalyticsCharts } from "@/components/AnalyticsCharts";
 
 export default async function ReportsPage() {
   const { userId } = await auth();
@@ -80,6 +81,8 @@ export default async function ReportsPage() {
           </div>
         </div>
       </div>
+
+      <AnalyticsCharts goals={allGoals} />
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center gap-3">

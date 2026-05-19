@@ -167,12 +167,56 @@ export function GoalSheetForm() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <Label>Description</Label>
+                  <div className="flex items-center justify-between">
+                    <Label>Description</Label>
+                    {!field.isShared && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 text-xs font-bold text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                        onClick={async () => {
+                          const currentTitle = form.getValues(`goals.${index}.title`);
+                          const currentDesc = form.getValues(`goals.${index}.description`);
+                          const currentThrust = form.getValues(`goals.${index}.thrustArea`);
+                          
+                          if (!currentDesc) {
+                            alert("Please write a rough draft in the description first.");
+                            return;
+                          }
+
+                          // Simple loading indicator on the button could be added, but we'll use a global or simple state if needed.
+                          // For simplicity, we just change the text of the button or use a toast.
+                          form.setValue(`goals.${index}.description`, "✨ Polishing with AI...");
+                          
+                          try {
+                            const res = await fetch("/api/ai/smart-goal", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ text: currentDesc, title: currentTitle, thrustArea: currentThrust })
+                            });
+                            
+                            if (res.ok) {
+                              const data = await res.json();
+                              form.setValue(`goals.${index}.description`, data.result);
+                            } else {
+                              form.setValue(`goals.${index}.description`, currentDesc);
+                              alert("Failed to polish goal.");
+                            }
+                          } catch (e) {
+                            form.setValue(`goals.${index}.description`, currentDesc);
+                          }
+                        }}
+                      >
+                        ✨ Polish with AI
+                      </Button>
+                    )}
+                  </div>
                   <Textarea 
                     {...form.register(`goals.${index}.description`)} 
                     placeholder="Provide details about how this goal will be achieved..."
                     className={`rounded-lg resize-none ${field.isShared ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
-                    rows={2}
+                    rows={4}
                     readOnly={field.isShared}
                   />
                 </div>
