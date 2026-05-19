@@ -11,9 +11,25 @@ export default async function ApprovalsPage() {
     return null;
   }
 
-  // In a real app, we'd filter by managerId. For the hackathon demo, we fetch all pending.
+  const dbUser = await prisma.user.findUnique({
+    where: { clerkId: userId }
+  });
+
+  if (!dbUser || dbUser.role === "EMPLOYEE") {
+    return (
+      <div className="p-8 text-center text-red-500 font-bold">
+        Access Denied. Only Managers and Admins can view this page.
+      </div>
+    );
+  }
+
+  const queryWhere: any = { status: "SUBMITTED" };
+  if (dbUser.role === "MANAGER") {
+    queryWhere.user = { managerId: dbUser.id };
+  }
+
   const pendingSheets = await prisma.goalSheet.findMany({
-    where: { status: "SUBMITTED" },
+    where: queryWhere,
     include: {
       user: true,
       goals: true,

@@ -10,9 +10,26 @@ export default async function TeamCheckInsPage() {
     return null;
   }
 
+  const dbUser = await prisma.user.findUnique({
+    where: { clerkId: userId }
+  });
+
+  if (!dbUser || dbUser.role === "EMPLOYEE") {
+    return (
+      <div className="p-8 text-center text-red-500 font-bold">
+        Access Denied. Only Managers and Admins can view this page.
+      </div>
+    );
+  }
+
+  const queryWhere: any = { status: "APPROVED" };
+  if (dbUser.role === "MANAGER") {
+    queryWhere.user = { managerId: dbUser.id };
+  }
+
   // Fetch check-ins for the team (all approved goal sheets with checkins)
   const activeSheets = await prisma.goalSheet.findMany({
-    where: { status: "APPROVED" },
+    where: queryWhere,
     include: {
       user: true,
       goals: {
