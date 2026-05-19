@@ -82,7 +82,7 @@ export function GoalSheetForm() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between sticky top-20 z-10">
+      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Total Weightage</h2>
           <div className="flex items-center gap-2 mt-1">
@@ -125,7 +125,7 @@ export function GoalSheetForm() {
         </div>
         <div className="relative z-10">
           <h3 className="text-lg font-extrabold text-indigo-900 flex items-center gap-2 mb-2">
-            <span className="text-xl">✨</span> Magic AI Auto-Filler
+            <span className="text-xl"> </span> Magic AI Auto-Filler
           </h3>
           <p className="text-sm text-indigo-700 mb-4 max-w-2xl">
             Have a messy email or document with your goals? Paste it below. The AI will parse it, structure it, and auto-fill your entire Goal Sheet.
@@ -249,7 +249,7 @@ export function GoalSheetForm() {
 
                           // Simple loading indicator on the button could be added, but we'll use a global or simple state if needed.
                           // For simplicity, we just change the text of the button or use a toast.
-                          form.setValue(`goals.${index}.description`, "✨ Polishing with AI...");
+                          form.setValue(`goals.${index}.description`, " Polishing with AI...");
                           
                           try {
                             const res = await fetch("/api/ai/smart-goal", {
@@ -270,7 +270,7 @@ export function GoalSheetForm() {
                           }
                         }}
                       >
-                        ✨ Polish with AI
+                         Polish with AI
                       </Button>
                     )}
                   </div>
