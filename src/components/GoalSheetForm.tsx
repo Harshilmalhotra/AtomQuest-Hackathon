@@ -21,6 +21,7 @@ const goalSchema = z.object({
   uomType: z.enum(["MIN_NUMERIC", "MAX_NUMERIC", "TIMELINE", "ZERO"]),
   target: z.coerce.number().min(0, "Target must be positive"),
   weightage: z.coerce.number().min(10, "Minimum weightage is 10%"),
+  isShared: z.boolean().optional(),
 });
 
 const formSchema = z.object({
@@ -35,7 +36,7 @@ export function GoalSheetForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       goals: [
         { title: "", description: "", thrustArea: "", uomType: "MIN_NUMERIC", target: 0, weightage: 100 }
