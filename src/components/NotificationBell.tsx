@@ -119,7 +119,7 @@ export default function NotificationBell() {
     setPermission(res);
     if (res === "granted") {
       playChime();
-      new Notification("Notifications Enabled! 🔔", {
+      new Notification("Notifications Enabled", {
         body: "You will now receive desktop notifications for goal updates.",
       });
     }

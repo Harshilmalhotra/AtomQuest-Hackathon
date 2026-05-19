@@ -28,7 +28,7 @@ export function WelcomeModal() {
       <DialogContent className="sm:max-w-5xl max-h-[90vh] overflow-y-auto sm:rounded-3xl p-0 border-none bg-slate-50">
         <div className="p-8 pb-4">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-extrabold text-slate-900">Welcome to AlignIQ! 🎉</DialogTitle>
+            <DialogTitle className="text-3xl font-extrabold text-slate-900">Welcome to AlignIQ</DialogTitle>
             <DialogDescription className="text-lg text-slate-500 mt-2">
               Before you dive in, here is a quick tour of the platform features available to you and your team.
             </DialogDescription>

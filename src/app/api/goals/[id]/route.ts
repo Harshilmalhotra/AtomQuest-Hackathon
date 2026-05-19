@@ -67,7 +67,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
         await tx.notification.create({
           data: {
             userId: updatedSheet.userId,
-            title: action === "APPROVED" ? "Goal Sheet Approved! 🎉" : "Goal Sheet Returned ⚠️",
+            title: action === "APPROVED" ? "Goal Sheet Approved" : "Goal Sheet Returned",
             message: action === "APPROVED" 
               ? `Your reporting manager ${dbUser.name || dbUser.email} has approved your Goal Sheet.`
               : `Your reporting manager ${dbUser.name || dbUser.email} has returned your Goal Sheet. Please review their feedback and resubmit.`,
