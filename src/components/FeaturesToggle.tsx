@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, Users, User, CheckCircle2, Target, BarChart3, Settings, PenTool, GitMerge } from "lucide-react";
+import { Shield, Users, User, CheckCircle2, Target, BarChart3, Settings, PenTool, GitMerge, Bell } from "lucide-react";
 
 export default function FeaturesToggle() {
   const [activeTab, setActiveTab] = useState<"ADMIN" | "MANAGER" | "EMPLOYEE">("EMPLOYEE");
@@ -77,6 +77,11 @@ export default function FeaturesToggle() {
                 title="Personal Dashboard" 
                 desc="Track your individual progress, view completed check-ins, and monitor your average system scores over time." 
               />
+              <FeatureCard 
+                icon={<Bell />} 
+                title="Real-Time Alerts & Desktop Push" 
+                desc="Get notified instantly with audio chimes and native desktop notifications when your manager is assigned or your goal sheets are approved/returned." 
+              />
             </div>
           </div>
         )}
@@ -103,6 +108,11 @@ export default function FeaturesToggle() {
                 icon={<BarChart3 />} 
                 title="Team Analytics" 
                 desc="Gain instant visibility into your team's overall progress with real-time charts and demographic reporting." 
+              />
+              <FeatureCard 
+                icon={<Bell />} 
+                title="Subordinate Action Alerts" 
+                desc="Receive instant desktop pushes and sound chime notifications whenever an employee submits a goal sheet for your review." 
               />
             </div>
           </div>

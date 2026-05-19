@@ -18,13 +18,24 @@ We went beyond the standard requirements to deliver a truly next-generation user
    - **The Feature**: A 1-click button next to every goal description box.
    - **The Tech**: Uses generative AI to rewrite rough drafts into highly professional **SMART** formats (Specific, Measurable, Achievable, Relevant, Time-bound). Includes a robust offline-mock fallback to guarantee the demo never fails even if the API key is rate-limited.
 
-3. **Advanced Interactive Analytics 📊**
+3. **Real-Time Push Notifications & Synthesized Sound Chime 🔔**
+   - **The Feature**: Real-time relative activity notifications (Manager assigned, Goal Sheets submitted, Goal Sheets approved or returned).
+   - **The Wow Tech**: Integrates native HTML5 desktop push notifications combined with a **Web Audio API synthesizer** that generates a premium dual-tone chord chime (G5 to C6) in the browser instantly without requiring heavy audio downloads or external asset dependencies.
+   - **Interactivity**: An elegant header Notification Bell with a dropdown that auto-polls, plays alerts, and houses a smart permission-toggle banner.
+
+4. **Dynamic Onboarding Walkthrough Tour 🗺️**
+   - When new users or judges log in for the first time, a gorgeous interactive Welcome Onboarding Modal appears, displaying role-based feature tours (Employee, Manager, Admin) to immediately guide them through the platform capabilities.
+
+5. **Admin Console & Hierarchy Builder 👔**
+   - A secure panel visible only to Admins allowing them to elevate users to `Manager` or `Admin` roles and assign Reporting Managers on the fly. Fallback states like *"Unassigned (Admin to assign Manager)"* immediately direct onboarding employees.
+
+6. **Advanced Interactive Analytics 📊**
    - Overhauled the reporting dashboard using `recharts` to render real-time, animated Pie Charts (Goal Status Distribution) and Bar Charts (Execution by Thrust Area) to give Admins an instant visual pulse of the organization.
 
-4. **Zero-Lag Perceived Navigation ⚡**
+7. **Zero-Lag Perceived Navigation ⚡**
    - Leveraged Next.js 14 React Suspense Boundaries (`loading.tsx`) to render gorgeous, animated skeleton layouts the exact millisecond a user clicks a tab, completely eliminating the "frozen" UI feeling while the database fetches data in the background.
 
-5. **Instant Demo Login Bypass 🎭**
+8. **Instant Demo Login Bypass 🎭**
    - Custom-built a secure session-cookie bypass wrapped around Clerk Authentication. This allows Hackathon judges to seamlessly instantly switch between `Admin`, `Manager`, and `Employee` roles with a single click on the login screen, completely skipping email verification hurdles during a live demo!
 
 ---
